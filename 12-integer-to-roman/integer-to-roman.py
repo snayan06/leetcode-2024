@@ -9,7 +9,6 @@ class Solution:
         Returns:
         - str: The Roman numeral representation of the input integer.
         """
-        # Mapping between integer values and their corresponding Roman numeral symbols
         roman_mapping = {
             1: 'I',
             4: 'IV',
@@ -26,15 +25,10 @@ class Solution:
             1000: 'M'
         }
 
-        # Initialize an empty string to store the Roman numeral representation
-        result = ""
-        while num>0:
-        # Iterate through the mapping in descending order of values
-            for value in sorted(roman_mapping.keys(), reverse=True):
-                if num >= value:
-                    result += roman_mapping[value]
-                    num -= value
-                    break
+        result_components = []
 
+        for value in sorted(roman_mapping.keys(), reverse=True):
+            quotient, num = divmod(num, value)
+            result_components.append(roman_mapping[value] * quotient)
 
-        return result
+        return ''.join(result_components)
