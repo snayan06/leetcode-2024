@@ -31,6 +31,4 @@ class Solution:
         # Sort the hash map based on frequency in descending order
         sorted_dict = dict(sorted(hash_map.items(), key=lambda item: item[1], reverse=True))
         
-        # Return the top k elements
-        result = list(sorted_dict.keys())[:k]
-        return result
+        return list(sorted_dict.keys())[:k]
