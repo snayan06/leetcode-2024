@@ -65,7 +65,7 @@ class Solution:
             index += 1  # Move to the next index
 
         # Check for a draw or pending status
-        if len(moves) == 9:
+        if len(moves) == n*n:
             return "Draw"
         else:
             return "Pending"
