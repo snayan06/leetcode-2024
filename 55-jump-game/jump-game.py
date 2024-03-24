@@ -26,7 +26,8 @@ class Solution:
         for i in range(n - 1, -1, -1):
             if i + nums[i] >= last_good_index:
                 last_good_index = i
-            if last_good_index == 0:
-                return True
+        
+        if last_good_index == 0:
+            return True
         
         return False
