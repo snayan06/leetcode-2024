@@ -32,6 +32,6 @@ class Solution:
             index = abs(nums[i]) - 1
             if nums[index] < 0:
                 answer.append(index + 1)
-            nums[index] = -1 * nums[index]
+            nums[index] = -nums[index]
 
         return answer
