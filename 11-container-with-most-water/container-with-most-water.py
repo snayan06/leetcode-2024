@@ -30,16 +30,16 @@ class Solution:
         Returns:
         int: Maximum area of water that can be trapped.
         """
-        if len(height)==2:
-            return min(height[0],height[1])
+        if len(height) == 2:
+            return min(height[0], height[1])
         n = len(height)
         left, right = 0, n - 1
-        area = -1
+        areas = []
         while left < right:
-            area = max(area, (right - left) * min(height[right], height[left]))
+            areas.append((right - left) * min(height[right], height[left]))
             if height[left] < height[right]:
                 left += 1
             else:
                 right -= 1
 
-        return area
+        return max(areas)
