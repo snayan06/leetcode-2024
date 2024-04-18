@@ -18,7 +18,6 @@ class Solution:
         curr = head
         count2 = 0
         while curr and curr.next:
-            print(curr.val, count)
             count2 += 1
             if count2 == count - n:
                 curr.next = curr.next.next
