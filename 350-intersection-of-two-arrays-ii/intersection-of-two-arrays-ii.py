@@ -15,9 +15,6 @@ class Solution:
             else:
                 d2[num] += 1
 
-        print(d1)
-        print(d2)
-
         set1 = set(nums1)
         set2 = set(nums2)
         set3 = set1.intersection(set2)
