@@ -3,26 +3,39 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        m, n = len(board), len(board[0])
+        if not board and not board[0]:
+            return
+        R = len(board)
+        C = len(board[0])
+        directions = [(-1, 0), (1, 0), (0, 1), (0, -1)]
 
-        def dfs(x, y):
-            board[x][y] = '#' # mark as protected
-            for x2, y2 in ((x+1, y), (x-1, y), (x, y+1), (x, y-1)):
-                if 0 <= x2 < m and 0 <= y2 < n and board[x2][y2] == 'O':
-                    dfs(x2, y2)
+        def dfs(sr, sc):
+            board[sr][sc] = "E"
+            for dx, dy in directions:
+                new_sr, new_sc = sr + dx, sc + dy
+                if 0 <= new_sr < R and 0 <= new_sc < C and board[new_sr][new_sc] == "O":
+                    dfs(new_sr, new_sc)
 
-        # dfs from 'O's on border
-        for i in range(m):
-            if board[i][0] == 'O': dfs(i, 0)
-            if board[i][n-1] == 'O': dfs(i, n-1)
-        for j in range(n):
-            if board[0][j] == 'O': dfs(0, j)
-            if board[m-1][j] == 'O': dfs(m-1, j)
+        # mark all boarders 'O'
 
-        # flip surrounding regions
-        for x in range(m):
-            for y in range(n):
-                if board[x][y] == 'O':
-                    board[x][y] = 'X' # change to 'X'
-                elif board[x][y] == '#':
-                    board[x][y] = 'O' # change back to 'O'
+        for i in range(R):
+            if board[i][0] == "O":
+                dfs(i, 0)
+            if board[i][C - 1] == "O":
+                dfs(i, C - 1)
+
+        for j in range(C):
+            if board[0][j] == "O":
+                dfs(0, j)
+            if board[R - 1][j] == "O":
+                dfs(R - 1, j)
+
+        # Step 2: Flip all remaining 'O's to 'X' and restore 'E's back to 'O'
+        for row in range(R):
+            for col in range(C):
+                if board[row][col] == "O":
+                    board[row][col] = "X"
+                elif board[row][col] == "E":
+                    board[row][col] = "O"
+
+        return
